@@ -10,7 +10,9 @@ This file is licensed under GPL-3.0-or-later
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaiseiHub"
         mc:Ignorable="d"
-        Title="Taisei Hub" Height="450" Width="696">
+        Title="Taisei Hub"
+        Height="450"
+        Width="696">
     <Grid>
         
     </Grid>
