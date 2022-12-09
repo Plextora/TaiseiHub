@@ -16,9 +16,53 @@ This file is licensed under GPL-3.0-or-later
         ResizeMode="NoResize"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <ControlTemplate TargetType="Button" x:Key="HoverButton">
+            <Border Name="RootElement">
+
+                <Grid>
+                    <Grid.Background>
+                        <SolidColorBrush x:Name="ButtonBackground" Color="#191919"/>
+                    </Grid.Background>
+                    <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="4,5,4,4"/>
+                </Grid>
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal"/>
+                        <VisualState x:Name="MouseOver">
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetName="ButtonBackground"
+                                                Storyboard.TargetProperty="Color" To="#252525" SpeedRatio="8" />
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="Pressed">
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetName="ButtonBackground"
+                                                Storyboard.TargetProperty="Color" To="#353535" SpeedRatio="8" />
+                            </Storyboard>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+            </Border>
+        </ControlTemplate>
+    </Window.Resources>
+
     <Grid
         x:Name="MainGrid"
         Background="#151515">
+        <Button
+            x:Name="CloseButton"
+            Content="&#xE894;"
+            Foreground="PeachPuff"
+            FontFamily="Segoe MDL2 Assets"
+            Template="{StaticResource HoverButton}"
+            Height="62"
+            Width="61"
+            Margin="639,0,0,0"
+            VerticalAlignment="Top"
+            Click="CloseButton_Click"/>
+
         <Rectangle
             HorizontalAlignment="Center"
             Height="62"
