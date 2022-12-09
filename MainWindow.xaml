@@ -12,8 +12,29 @@ This file is licensed under GPL-3.0-or-later
         mc:Ignorable="d"
         Title="Taisei Hub"
         Height="450"
-        Width="696">
-    <Grid>
-        
+        Width="700"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen">
+    <Grid
+        x:Name="MainGrid"
+        Background="#151515">
+        <Rectangle
+            HorizontalAlignment="Center"
+            Height="62"
+            Width="700"
+            Stroke="PeachPuff"
+            StrokeThickness="0.5"
+            VerticalAlignment="Top"/>
+        <Label
+            x:Name="TitleLabel"
+            Content="Taisei Hub"
+            FontFamily="Segoe UI Semilight"
+            FontSize="25px"
+            Foreground="PeachPuff"
+            HorizontalAlignment="Left"
+            Margin="10,9,0,0"
+            VerticalAlignment="Top"/>
+
     </Grid>
 </Window>
