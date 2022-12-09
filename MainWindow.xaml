@@ -1,0 +1,17 @@
+﻿<!--
+Copyright Plextora 2022
+This file is licensed under GPL-3.0-or-later
+-->
+
+<Window x:Class="TaiseiHub.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TaiseiHub"
+        mc:Ignorable="d"
+        Title="Taisei Hub" Height="450" Width="696">
+    <Grid>
+        
+    </Grid>
+</Window>
