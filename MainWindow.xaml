@@ -101,8 +101,8 @@ This file is licensed under GPL-3.0-or-later
             FontFamily="Segoe UI Light"
             FontSize="15px"
             Foreground="PeachPuff"
-            HorizontalAlignment="Center"
-            Margin="0,420,0,0"
+            HorizontalAlignment="Left"
+            Margin="10,420,0,0"
             VerticalAlignment="Top"/>
 
     </Grid>
