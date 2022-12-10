@@ -19,7 +19,7 @@ This file is licensed under GPL-3.0-or-later
 
     <Window.Resources>
         <ControlTemplate TargetType="Button" x:Key="HoverButton">
-            <Border Name="RootElement">
+            <Border Name="RootElement" BorderThickness="1">
 
                 <Grid>
                     <Grid.Background>
@@ -70,17 +70,22 @@ This file is licensed under GPL-3.0-or-later
             Template="{StaticResource HoverButton}"
             Height="62"
             Width="61"
-            Margin="579,0,60,0"
+            Margin="580,0,59,0"
             VerticalAlignment="Top"
             Click="MinimizeButton_Click"/>
-
-        <Rectangle
-            HorizontalAlignment="Center"
-            Height="62"
-            Width="700"
-            Stroke="PeachPuff"
-            StrokeThickness="0.5"
-            VerticalAlignment="Top"/>
+        <Grid
+            Panel.ZIndex="-1">
+            <Rectangle
+                x:Name="WindowToolbar"
+                HorizontalAlignment="Center"
+                Height="62"
+                Width="700"
+                Fill="#161616"
+                Stroke="PeachPuff"
+                StrokeThickness="0.5"
+                VerticalAlignment="Top"
+                MouseLeftButtonDown="WindowToolbar_MouseLeftButtonDown"/>
+        </Grid>
         <Label
             x:Name="TitleLabel"
             Content="Taisei Hub"

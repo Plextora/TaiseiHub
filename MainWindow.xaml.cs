@@ -18,5 +18,7 @@ namespace TaiseiHub
         private void CloseButton_Click(object sender, RoutedEventArgs e) => Application.Current.Shutdown();
 
         private void MinimizeButton_Click(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
+
+        private void WindowToolbar_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e) => DragMove();
     }
 }
