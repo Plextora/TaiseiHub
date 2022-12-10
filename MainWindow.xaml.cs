@@ -26,6 +26,8 @@ namespace TaiseiHub
             _checkGameState.Interval = new TimeSpan(0, 0, 1);
             _checkGameState.Start();
 
+            AppDomain.CurrentDomain.ProcessExit += OnProcessExit;
+
             if (!_memoryManager.OpenProcess("taisei")) SetStatusLabel("Closed!", "#DC143C");
         }
 
@@ -63,5 +65,7 @@ namespace TaiseiHub
         private void MinimizeButton_Click(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
 
         private void WindowToolbar_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e) => DragMove();
+
+        private void OnProcessExit(object sender, EventArgs e) => _memoryManager.CloseProcess();
     }
 }
