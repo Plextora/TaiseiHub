@@ -95,6 +95,15 @@ This file is licensed under GPL-3.0-or-later
             HorizontalAlignment="Left"
             Margin="10,9,0,0"
             VerticalAlignment="Top"/>
+        <Label
+            x:Name="StatusLabel"
+            Content="Game Status: Unknown"
+            FontFamily="Segoe UI Light"
+            FontSize="15px"
+            Foreground="PeachPuff"
+            HorizontalAlignment="Center"
+            Margin="0,420,0,0"
+            VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
