@@ -33,10 +33,12 @@ namespace TaiseiHub
 
         private void _checkGameState_Tick(object sender, EventArgs e)
         {
-            int pausedState = _memoryManager.ReadInt("taisei.exe+98E3D8");
+            int pausedState = _memoryManager.ReadInt("taisei.exe+977B50");
+            int pausedStateExtended = _memoryManager.ReadInt("taisei.exe+98E3D8");
 
-            if (pausedState != 0) SetStatusLabel("Playing!", "#98FB98");
-            else SetStatusLabel("Paused/In Menu!", "#F0E68C");
+            if (pausedState == 0) SetStatusLabel("Paused!", "#F0E68C");
+            else if (pausedStateExtended != 0) SetStatusLabel("Playing!", "#98FB98");
+            else SetStatusLabel("In Menu!", "#F0E68C");
 
             if (!IsTaiseiRunning()) SetStatusLabel("Closed!", "#DC143C");
             else if (IsTaiseiRunning()) _memoryManager.OpenProcess("taisei");
