@@ -17,8 +17,9 @@ This file is licensed under GPL-3.0-or-later
         WindowStyle="None"
         WindowStartupLocation="CenterScreen">
 
+    <!-- region Control Templates -->
     <Window.Resources>
-        <ControlTemplate TargetType="Button" x:Key="HoverButton">
+        <ControlTemplate TargetType="Button" x:Key="DefaultButton">
             <Border Name="RootElement" BorderThickness="1">
 
                 <Grid>
@@ -51,7 +52,76 @@ This file is licensed under GPL-3.0-or-later
                 </VisualStateManager.VisualStateGroups>
             </Border>
         </ControlTemplate>
+
+        <ControlTemplate TargetType="Button" x:Key="CloseButton">
+            <Border Name="RootElement" BorderThickness="1">
+
+                <Grid>
+                    <Grid.Background>
+                        <SolidColorBrush x:Name="ButtonBackground" Color="#191919"/>
+                    </Grid.Background>
+                    <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="4,5,4,4"/>
+                </Grid>
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetName="ButtonBackground"
+                                                Storyboard.TargetProperty="Color" To="#191919" SpeedRatio="8" />
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="MouseOver">
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetName="ButtonBackground"
+                                                Storyboard.TargetProperty="Color" To="#f7c1c1" SpeedRatio="8" />
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="Pressed">
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetName="ButtonBackground"
+                                                Storyboard.TargetProperty="Color" To="#ffabab" SpeedRatio="8" />
+                            </Storyboard>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+            </Border>
+        </ControlTemplate>
+
+        <ControlTemplate TargetType="Button" x:Key="MinimizeButton">
+            <Border Name="RootElement" BorderThickness="1">
+
+                <Grid>
+                    <Grid.Background>
+                        <SolidColorBrush x:Name="ButtonBackground" Color="#191919"/>
+                    </Grid.Background>
+                    <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="4,5,4,4"/>
+                </Grid>
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetName="ButtonBackground"
+                                                Storyboard.TargetProperty="Color" To="#191919" SpeedRatio="8" />
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="MouseOver">
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetName="ButtonBackground"
+                                                Storyboard.TargetProperty="Color" To="#83c8fc" SpeedRatio="8" />
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="Pressed">
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetName="ButtonBackground"
+                                                Storyboard.TargetProperty="Color" To="#c0e2fc" SpeedRatio="8" />
+                            </Storyboard>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+            </Border>
+        </ControlTemplate>
     </Window.Resources>
+    <!-- endregion -->
 
     <Grid
         x:Name="MainGrid"
@@ -61,7 +131,7 @@ This file is licensed under GPL-3.0-or-later
             Content="&#xE894;"
             Foreground="PeachPuff"
             FontFamily="Segoe MDL2 Assets"
-            Template="{StaticResource HoverButton}"
+            Template="{StaticResource CloseButton}"
             Height="62"
             Width="61"
             Margin="639,0,0,0"
@@ -72,10 +142,10 @@ This file is licensed under GPL-3.0-or-later
             Content="&#xE738;"
             Foreground="PeachPuff"
             FontFamily="Segoe MDL2 Assets"
-            Template="{StaticResource HoverButton}"
+            Template="{StaticResource MinimizeButton}"
             Height="62"
             Width="61"
-            Margin="580,0,59,0"
+            Margin="581,0,58,0"
             VerticalAlignment="Top"
             Click="MinimizeButton_Click"/>
         <Grid
