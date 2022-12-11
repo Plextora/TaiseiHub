@@ -20,6 +20,7 @@ namespace TaiseiHub
         DispatcherTimer _giveInfHealth = new DispatcherTimer();
         private DispatcherTimer _giveInfSC = new DispatcherTimer(); // SC = Spell Cards
         static Mem _memoryManager = new Mem();
+        private int _cheatsRunning = 0;
 
         public MainWindow()
         {
@@ -47,14 +48,26 @@ namespace TaiseiHub
             {
                 if (_giveInfHealth.IsEnabled)
                 {
+                    _cheatsRunning -= 1;
+
+                    if (_cheatsRunning <= 0)
+                    {
+                        SetStatusLabel(CheatStatusLabel, "Cheat Status: Running no cheats!", "#ffdab9");
+                        InfiniteHealthButton.Content = "Infinite Health (Off)";
+                        _giveInfHealth.Stop();
+                        _memoryManager.WriteMemory("taisei.exe+98F548", "int", "2");
+                        return;
+                    }
+
                     InfiniteHealthButton.Content = "Infinite Health (Off)";
-                    SetStatusLabel(CheatStatusLabel, "Cheat Status: No cheats running", "#ffdab9");
+                    SetStatusLabel(CheatStatusLabel, $"Cheat Status: Running {_cheatsRunning} cheats!", "#c7fcc7");
                     _giveInfHealth.Stop();
                     _memoryManager.WriteMemory("taisei.exe+98F548", "int", "2");
                     return;
                 }
 
-                SetStatusLabel(CheatStatusLabel, "Cheat Status: Running infinite health!", "#c7fcc7");
+                _cheatsRunning += 1;
+                SetStatusLabel(CheatStatusLabel, $"Cheat Status: Running {_cheatsRunning} cheats!", "#c7fcc7");
                 InfiniteHealthButton.Content = "Infinite Health (On)";
 
                 _giveInfHealth.Start();
@@ -67,14 +80,26 @@ namespace TaiseiHub
             {
                 if (_giveInfSC.IsEnabled)
                 {
+                    _cheatsRunning -= 1;
+
+                    if (_cheatsRunning <= 0)
+                    {
+                        SetStatusLabel(CheatStatusLabel, "Cheat Status: Running no cheats!", "#ffdab9");
+                        InfiniteSpellCardButton.Content = "Infinite Spell Cards (Off)";
+                        _giveInfSC.Stop();
+                        _memoryManager.WriteMemory("taisei.exe+98F54C", "int", "3");
+                        return;
+                    }
+
                     InfiniteSpellCardButton.Content = "Infinite Spell Cards (Off)";
-                    SetStatusLabel(CheatStatusLabel, "Cheat Status: No cheats running", "#ffdab9");
+                    SetStatusLabel(CheatStatusLabel, $"Cheat Status: Running {_cheatsRunning} cheats!", "#c7fcc7");
                     _giveInfSC.Stop();
                     _memoryManager.WriteMemory("taisei.exe+98F54C", "int", "3");
                     return;
                 }
 
-                SetStatusLabel(CheatStatusLabel, "Cheat Status: Running infinite spell cards!", "#c7fcc7");
+                _cheatsRunning += 1;
+                SetStatusLabel(CheatStatusLabel, $"Cheat Status: Running {_cheatsRunning} cheats!", "#c7fcc7");
                 InfiniteSpellCardButton.FontSize = 14;
                 InfiniteSpellCardButton.Content = "Infinite Spell Cards (On)";
 
@@ -88,6 +113,8 @@ namespace TaiseiHub
             {
                 SetStatusLabel(CheatStatusLabel, "Cheat status: Failed to write memory.", "#DC143C");
                 InfiniteHealthButton.Content = "Infinite Health (Off)";
+                _cheatsRunning -= 1;
+                _giveInfHealth.Stop();
             }
         }
 
@@ -97,6 +124,8 @@ namespace TaiseiHub
             {
                 SetStatusLabel(CheatStatusLabel, "Cheat status: Failed to write memory.", "#DC143C");
                 InfiniteSpellCardButton.Content = "Infinite Spell Cards (Off)";
+                _cheatsRunning -= 1;
+                _giveInfSC.Stop();
             }
         }
 
