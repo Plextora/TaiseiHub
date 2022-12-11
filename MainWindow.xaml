@@ -29,7 +29,12 @@ This file is licensed under GPL-3.0-or-later
                 </Grid>
                 <VisualStateManager.VisualStateGroups>
                     <VisualStateGroup x:Name="CommonStates">
-                        <VisualState x:Name="Normal"/>
+                        <VisualState x:Name="Normal">
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetName="ButtonBackground"
+                                                Storyboard.TargetProperty="Color" To="#191919" SpeedRatio="8" />
+                            </Storyboard>
+                        </VisualState>
                         <VisualState x:Name="MouseOver">
                             <Storyboard>
                                 <ColorAnimation Storyboard.TargetName="ButtonBackground"
