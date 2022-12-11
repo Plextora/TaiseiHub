@@ -148,6 +148,17 @@ This file is licensed under GPL-3.0-or-later
             Margin="581,0,58,0"
             VerticalAlignment="Top"
             Click="MinimizeButton_Click"/>
+        <Button
+            x:Name="InfiniteHealthButton"
+            Content="Infinite Health"
+            Foreground="PeachPuff"
+            FontFamily="Segoe UI Semilight"
+            FontSize="17px"
+            Template="{StaticResource DefaultButton}"
+            Height="38"
+            Margin="10,92,534,0"
+            VerticalAlignment="Top"
+            Click="InfiniteHealthButton_OnClick"/>
         <Grid
             Panel.ZIndex="-1">
             <Rectangle
@@ -160,6 +171,13 @@ This file is licensed under GPL-3.0-or-later
                 StrokeThickness="0.5"
                 VerticalAlignment="Top"
                 MouseLeftButtonDown="WindowToolbar_MouseLeftButtonDown"/>
+            <Label
+                Content="These buttons are all toggleable"
+                Foreground="PeachPuff"
+                FontFamily="Segoe UI Light"
+                HorizontalAlignment="Left"
+                Margin="10,62,0,0"
+                VerticalAlignment="Top"/>
         </Grid>
         <Label
             x:Name="TitleLabel"
@@ -171,7 +189,7 @@ This file is licensed under GPL-3.0-or-later
             Margin="10,9,0,0"
             VerticalAlignment="Top"/>
         <Label
-            x:Name="StatusLabel"
+            x:Name="GameStatusLabel"
             Content="Game Status: Unknown"
             FontFamily="Segoe UI Light"
             FontSize="15px"
@@ -179,6 +197,14 @@ This file is licensed under GPL-3.0-or-later
             HorizontalAlignment="Left"
             Margin="10,420,0,0"
             VerticalAlignment="Top"/>
-
+        <Label
+            x:Name="CheatStatusLabel"
+            Content="Cheat Status: No cheats running"
+            FontFamily="Segoe UI Light"
+            FontSize="15px"
+            Foreground="PeachPuff"
+            HorizontalAlignment="Right"
+            Margin="0,420,10,0"
+            VerticalAlignment="Top"/>
     </Grid>
 </Window>
