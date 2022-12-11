@@ -18,6 +18,7 @@ namespace TaiseiHub
     {
         DispatcherTimer _checkGameState = new DispatcherTimer();
         DispatcherTimer _giveInfHealth = new DispatcherTimer();
+        private DispatcherTimer _giveInfSC = new DispatcherTimer(); // SC = Spell Cards
         static Mem _memoryManager = new Mem();
 
         public MainWindow()
@@ -29,6 +30,8 @@ namespace TaiseiHub
 
             _giveInfHealth.Tick += _giveInfHealth_Tick;
             _giveInfHealth.Interval = new TimeSpan(0, 0, (int)0.5);
+            _giveInfSC.Tick += _giveInfSC_Tick;
+            _giveInfSC.Interval = new TimeSpan(0, 0, (int)0.5);
             _checkGameState.Start();
 
             AppDomain.CurrentDomain.ProcessExit += OnProcessExit;
@@ -58,12 +61,42 @@ namespace TaiseiHub
             }
         }
 
+        private void InfiniteSpellCardButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (IsTaiseiRunning())
+            {
+                if (_giveInfSC.IsEnabled)
+                {
+                    InfiniteSpellCardButton.Content = "Infinite Spell Cards (Off)";
+                    SetStatusLabel(CheatStatusLabel, "Cheat Status: No cheats running", "#ffdab9");
+                    _giveInfSC.Stop();
+                    _memoryManager.WriteMemory("taisei.exe+98F54C", "int", "3");
+                    return;
+                }
+
+                SetStatusLabel(CheatStatusLabel, "Cheat Status: Running infinite spell cards!", "#c7fcc7");
+                InfiniteSpellCardButton.FontSize = 14;
+                InfiniteSpellCardButton.Content = "Infinite Spell Cards (On)";
+
+                _giveInfSC.Start();
+            }
+        }
+
         private void _giveInfHealth_Tick(object sender, EventArgs e)
         {
             if (!_memoryManager.WriteMemory("taisei.exe+98F548", "int", "8"))
             {
                 SetStatusLabel(CheatStatusLabel, "Cheat status: Failed to write memory.", "#DC143C");
                 InfiniteHealthButton.Content = "Infinite Health (Off)";
+            }
+        }
+
+        private void _giveInfSC_Tick(object sender, EventArgs e)
+        {
+            if (!_memoryManager.WriteMemory("taisei.exe+98F54C", "int", "8"))
+            {
+                SetStatusLabel(CheatStatusLabel, "Cheat status: Failed to write memory.", "#DC143C");
+                InfiniteSpellCardButton.Content = "Infinite Spell Cards (Off)";
             }
         }
 
