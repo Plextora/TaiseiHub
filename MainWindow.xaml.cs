@@ -16,11 +16,13 @@ namespace TaiseiHub
     /// </summary>
     public partial class MainWindow : Window
     {
-        DispatcherTimer _checkGameState = new DispatcherTimer();
-        DispatcherTimer _giveInfHealth = new DispatcherTimer();
+        private DispatcherTimer _checkGameState = new DispatcherTimer();
+        private DispatcherTimer _giveInfHealth = new DispatcherTimer();
         private DispatcherTimer _giveInfSC = new DispatcherTimer(); // SC = Spell Cards
+        DispatcherTimer _removeGraze = new DispatcherTimer();
         static Mem _memoryManager = new Mem();
         private int _cheatsRunning = 0;
+        private int previousGraze;
 
         public MainWindow()
         {
@@ -33,6 +35,9 @@ namespace TaiseiHub
             _giveInfHealth.Interval = new TimeSpan(0, 0, (int)0.5);
             _giveInfSC.Tick += _giveInfSC_Tick;
             _giveInfSC.Interval = new TimeSpan(0, 0, (int)0.5);
+            _removeGraze.Tick += _removeGraze_Tick;
+            _removeGraze.Interval = new TimeSpan(0, 0, (int)0.5);
+
             _checkGameState.Start();
 
             AppDomain.CurrentDomain.ProcessExit += OnProcessExit;
@@ -107,6 +112,39 @@ namespace TaiseiHub
             }
         }
 
+        private void NoGrazeButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (IsTaiseiRunning())
+            {
+                if (_removeGraze.IsEnabled)
+                {
+                    _cheatsRunning -= 1;
+
+                    if (_cheatsRunning <= 0)
+                    {
+                        SetStatusLabel(CheatStatusLabel, "Cheat Status: Running no cheats!", "#ffdab9");
+                        NoGrazeButton.Content = "Remove Graze (Off)";
+                        _removeGraze.Stop();
+                        _memoryManager.WriteMemory("taisei.exe+98F540", "int", previousGraze.ToString());
+                        return;
+                    }
+
+                    NoGrazeButton.Content = "Remove Graze (Off)";
+                    SetStatusLabel(CheatStatusLabel, $"Cheat Status: Running {_cheatsRunning} cheats!", "#c7fcc7");
+                    _removeGraze.Stop();
+                    _memoryManager.WriteMemory("taisei.exe+98F540", "int", previousGraze.ToString());
+                    return;
+                }
+
+                previousGraze = _memoryManager.ReadInt("taisei.exe+98F540");
+                _cheatsRunning += 1;
+                SetStatusLabel(CheatStatusLabel, $"Cheat Status: Running {_cheatsRunning} cheats!", "#c7fcc7");
+                NoGrazeButton.Content = "Remove Graze (On)";
+
+                _removeGraze.Start();
+            }
+        }
+
         private void _giveInfHealth_Tick(object sender, EventArgs e)
         {
             if (!_memoryManager.WriteMemory("taisei.exe+98F548", "int", "8"))
@@ -126,6 +164,17 @@ namespace TaiseiHub
                 InfiniteSpellCardButton.Content = "Infinite Spell Cards (Off)";
                 _cheatsRunning -= 1;
                 _giveInfSC.Stop();
+            }
+        }
+
+        private void _removeGraze_Tick(object sender, EventArgs e)
+        {
+            if (!_memoryManager.WriteMemory("taisei.exe+98F540", "int", "0"))
+            {
+                SetStatusLabel(CheatStatusLabel, "Cheat status: Failed to write memory.", "#DC143C");
+                InfiniteSpellCardButton.Content = "Remove Graze (Off)";
+                _cheatsRunning -= 1;
+                _removeGraze.Stop();
             }
         }
 

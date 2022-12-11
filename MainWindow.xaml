@@ -170,6 +170,17 @@ This file is licensed under GPL-3.0-or-later
             Margin="171,92,373,0"
             VerticalAlignment="Top"
             Click="InfiniteSpellCardButton_OnClick"/>
+        <Button
+            x:Name="NoGrazeButton"
+            Content="Remove Graze"
+            Foreground="PeachPuff"
+            FontFamily="Segoe UI Semilight"
+            FontSize="17px"
+            Template="{StaticResource DefaultButton}"
+            Height="38"
+            Margin="332,92,212,0"
+            VerticalAlignment="Top"
+            Click="NoGrazeButton_OnClick"/>
         <Grid
             Panel.ZIndex="-1">
             <Rectangle
