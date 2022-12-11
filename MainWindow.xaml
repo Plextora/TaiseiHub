@@ -24,7 +24,7 @@ This file is licensed under GPL-3.0-or-later
 
                 <Grid>
                     <Grid.Background>
-                        <SolidColorBrush x:Name="ButtonBackground" Color="#191919"/>
+                        <SolidColorBrush x:Name="ButtonBackground" Color="#202020"/>
                     </Grid.Background>
                     <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="4,5,4,4"/>
                 </Grid>
@@ -33,19 +33,19 @@ This file is licensed under GPL-3.0-or-later
                         <VisualState x:Name="Normal">
                             <Storyboard>
                                 <ColorAnimation Storyboard.TargetName="ButtonBackground"
-                                                Storyboard.TargetProperty="Color" To="#191919" SpeedRatio="8" />
+                                                Storyboard.TargetProperty="Color" To="#202020" SpeedRatio="8" />
                             </Storyboard>
                         </VisualState>
                         <VisualState x:Name="MouseOver">
                             <Storyboard>
                                 <ColorAnimation Storyboard.TargetName="ButtonBackground"
-                                                Storyboard.TargetProperty="Color" To="#252525" SpeedRatio="8" />
+                                                Storyboard.TargetProperty="Color" To="#303030" SpeedRatio="8" />
                             </Storyboard>
                         </VisualState>
                         <VisualState x:Name="Pressed">
                             <Storyboard>
                                 <ColorAnimation Storyboard.TargetName="ButtonBackground"
-                                                Storyboard.TargetProperty="Color" To="#353535" SpeedRatio="8" />
+                                                Storyboard.TargetProperty="Color" To="#404040" SpeedRatio="8" />
                             </Storyboard>
                         </VisualState>
                     </VisualStateGroup>
